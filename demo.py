@@ -88,8 +88,8 @@ def convert_bd_to_gcj(input_excel_path, output_excel_path):
 
 if __name__ == '__main__':
     # 正确设置路径，避免路径拼接错误
-    input_excel_path = r'J:\100-工作\濠江区旅游资源坐标点\濠江区旅游资源需调整的坐标点.xlsx'  # 输入Excel文件的路径
-    output_excel_path = r'J:\100-工作\濠江区旅游资源坐标点\濠江区旅游资源需调整的坐标点_火星.xlsx'  # 输出Excel文件的路径
+    input_excel_path = r'\xx\xx\xxxx.xlsx'  # 输入Excel文件的路径
+    output_excel_path = r'\xx\xx\xxxx2.xlsx.xlsx'  # 输出Excel文件的路径
 
     # 调用函数进行转换
     convert_bd_to_gcj(input_excel_path, output_excel_path)
