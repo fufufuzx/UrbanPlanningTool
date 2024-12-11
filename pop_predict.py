@@ -38,7 +38,7 @@ class PopPredict:
         cgr = (final_population / initial_population) ** (1 / years) - 1
         return cgr
     
-    def predict_population_by_cgr(
+    def predict_by_cgr(
             self,
             initial_population: int | float,
             cgr: int | float,
@@ -61,13 +61,14 @@ class PopPredict:
 
 
 if __name__ == "__main__":
-    pop_2035 = PopPredict(2021, 2035)
+    pop_2035 = PopPredict(2020, 2035)
     start_year = 2010
     initial_population = 539.62
     end_year = 2020
     final_population = 550.37
     cgr = pop_2035.calculate_cgr(2010, 539.62, 2020, 550.37)
-    result = pop_2035.predict_population_by_cgr(550.37, cgr)
+    cgr = 0.008
+    result = pop_2035.predict_by_cgr(550.37, cgr)
 
     print(f"{start_year}~{end_year}年间的人口综合增长率为{round(cgr * 100, 2)}%")
     print(f"到{pop_2035.planning_end_year}人口预计将达到{int(result)}万人")
