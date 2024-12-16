@@ -48,14 +48,15 @@ WATER_NEED_YEAR_PER:int | float = 180 * 365 #人均每年消耗的居民生活�
 
 
 class PopPredict:
-    def __init__(
-            self,
-            init_year: int,
-            end_year: int,
-    ) -> None:
+    def __init__(self, init_year: int, end_year: int, method: str) -> None:
         self.init_year = init_year
         self.end_year = end_year
+        self.method = method
 
+    @classmethod
+    def by_cgr(cls, ):
+        ...
+    
     @staticmethod
     def calculate_cgr(
             start_year: int,
@@ -87,7 +88,6 @@ class PopPredict:
     def predict_by_cgr(
             self,
             initial_population: int | float,
-            cgr: int | float,
         ) -> float | int:
         """
         根据综合增长率方法预测规划末期人口
@@ -102,21 +102,17 @@ class PopPredict:
             raise ValueError("初始人口必须大于零")
         
         years = self.end_year - self.init_year
-        predicted_population = initial_population * (1 + cgr) ** years
+        predicted_population = initial_population * (1 + self.growth_rate) ** years
         return predicted_population
 
 
 if __name__ == "__main__":
-    pop_2035 = PopPredict(2020, 2035)
-    start_year = 2010
-    initial_population = 539.62
-    final_year = 2020
-    final_population = 550.37
-    cgr = pop_2035.calculate_cgr(2010, 539.62, 2020, 550.37)
+    cgr = PopPredict.calculate_cgr(2010, 539.62, 2020, 550.37)
     # cgr = 0.008
-    result = pop_2035.predict_by_cgr(550.37, cgr)
+    pop_2035 = PopPredict(2020, 2035, cgr)
+    result = pop_2035.predict_by_cgr(550.37)
     
-    print(f"{start_year}~{final_year}年间的人口综合增长率为{round(cgr * 100, 2)}%")
+    print(f"2010~2020年间的人口综合增长率为{round(cgr * 100, 2)}%")
     print(f"到{pop_2035.end_year}人口预计将达到{int(result)}万人")
     print(f"需要提供{round(result * GRAIN_NEED_YEAR_PER, 2)}千克的粮食才能养活这个城市")
     print(f"需要提供{round(result * GRAIN_NEED_YEAR_PER / 600, 2)}亩的耕地才能养活这个城市")
