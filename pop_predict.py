@@ -61,6 +61,7 @@ class PredictByResArea:
 
 class PopPredict:
     def __init__(self, method):
+        # 选择预测的策略
         if method == "cgr":
             self.method = PredictByCgr()
         elif method == "land":
@@ -91,4 +92,7 @@ if __name__ == "__main__":
     b = PredictByCgr()
     result = b.calc(2020, 550.37, 0.008, 2035)
     print(result)
+
+    x = PopPredict("cgr")
+    print(x.calc(2020, 550.37, 0.008, 2035))
 
