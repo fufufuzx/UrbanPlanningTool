@@ -56,15 +56,21 @@ class PredictByCgr:
         return cgr
 
 class PredictByResArea:
-    def __init__(self) -> None:
+    def calc(self, input:int):
         pass
 
 class PopPredict:
-    def __init__(self):
-        self.method = PredictByCgr()
+    def __init__(self, method):
+        if method == "cgr":
+            self.method = PredictByCgr()
+        elif method == "land":
+            self.method = PredictByResArea()
+        else:
+            raise ValueError("Can't find this method")
     
-    def calc(self):
-        return self.method.calc
+    def calc(self, *args, **kwargs):
+        # 使用对应的策略进行预测
+        return self.method.calc(*args, **kwargs)
 
 
 
